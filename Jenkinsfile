@@ -6,14 +6,14 @@ pipeline {
 		stages {
 			stage('One') {
 				steps {
-					sh 'echo "Setting environment variable to true"'
+					sh 'echo "First Stage"'
 				}
 			}
 
 			stage('Two') {
 				when {
-                    environment name: 'EXECUTE', value:'True'
-               		}
+                    expression{env.EXECUTE}
+               	}
                 steps {
 					sh 'echo "Updating Second Stage, environment variable value:"'
                     sh 'echo ${EXECUTE}'
@@ -22,8 +22,8 @@ pipeline {
 
 			stage('Three') {
 				when {
-				    environment name: 'EXECUTE', value:'False'
-				}
+				    expression{env.EXECUTE}
+                }
 				steps {
 					sh 'echo "Executing third stage because the value of the environment variable is: ${EXECUTE}"'
 				}
