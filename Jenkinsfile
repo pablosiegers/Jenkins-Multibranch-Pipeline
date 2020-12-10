@@ -22,7 +22,7 @@ pipeline {
 
 			stage('Three') {
 				when {
-				    expression{env.EXECUTE}
+				    expression{!env.EXECUTE}
                 }
 				steps {
 					sh 'echo "Executing third stage because the value of the environment variable is: ${EXECUTE}"'
