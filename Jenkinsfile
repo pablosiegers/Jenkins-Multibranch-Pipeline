@@ -1,10 +1,12 @@
 pipeline {
 	agent any
+    environment {
+        EXECUTE = 'true'
+    }
 		stages {
 			stage('One') {
 				steps {
 					sh 'echo "Setting environment variable to true"'
-                    env.EXECUTE='True'
 				}
 			}
 
@@ -12,7 +14,7 @@ pipeline {
 				when {
                     environment name: 'EXECUTE', value:'True'
                		}
-                	steps {
+                steps {
 					sh 'echo "Updating Second Stage, environment variable value:"'
                     sh 'echo ${EXECUTE}'
 				}
