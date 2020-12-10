@@ -3,26 +3,27 @@ pipeline {
 		stages {
 			stage('One') {
 				steps {
-					sh '
-						echo "Step One"
-					'
+					sh 'echo "Setting environment variable to true"'
+                    env.EXECUTE='True'
 				}
 			}
 
-
 			stage('Two') {
-				steps {
-					sh '
-						echo "Step Two"
-					'
+				when {
+                    environment name: 'EXECUTE', value:'True'
+                }
+                steps {
+					sh 'echo "Updating Second Stage, environment variable value:"'
+                    sh 'echo ${EXECUTE}'
 				}
 			} 
 
 			stage('Three') {
+                when {
+                    environment name: 'EXECUTE', value:'False'
+                }
 				steps {
-					sh '
-						echo "Step Three"
-					'
+					sh 'echo "Executing third stage because the value of the environment variable is: ${EXECUTE}"'
 				}
 			}
 		}
