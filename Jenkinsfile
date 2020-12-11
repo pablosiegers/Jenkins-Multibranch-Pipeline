@@ -25,7 +25,7 @@ pipeline {
 				    expression{!env.EXECUTE}
                 }
 				steps {
-					sh 'echo "Executing third stage because the value of the environment variable is: ${EXECUTE}"'
+					sh 'echo "Executing third sstage because the value of the environment variable is: ${EXECUTE}"'
 				}
 			}
 		}
